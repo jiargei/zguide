@@ -326,7 +326,11 @@ private:
        msg->push_front (command);
        msg->push_front (k_mdpw_worker.data());
        //  Stack routing envelope to start of message
-       msg->wrap(worker->m_identity.c_str(), "");
+       zmsg::ustring z_sender (
+	   reinterpret_cast<unsigned char const *> (worker->m_identity.c_str ()),
+	   worker->m_identity.size ());
+
+       msg->wrap(z_sender, "");
 
        if (m_verbose) {
            s_console ("I: sending %s to worker",
