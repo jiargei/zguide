@@ -144,6 +144,12 @@ public:
       m_part_data.insert(m_part_data.begin(), (unsigned char*)part);
    }
 
+   // zmsg_push (needed for propper address handling)
+   void push_front (const ustring part)
+   {
+      m_part_data.insert (m_part_data.begin (), part);
+   }
+
    // zmsg_append
    void push_back(const char *part) {
       m_part_data.push_back((unsigned char*)part);
